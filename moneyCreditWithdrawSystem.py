@@ -1,6 +1,6 @@
 class moneyCreditWithdrawSystem:
     # Constructor for the moneyCreditWithdrawSystem class.
-    def __init__(self) -> None:
+    def __init__(self):
         pass
     
     # Method to initialize the entrance process.
@@ -13,7 +13,17 @@ class moneyCreditWithdrawSystem:
                 2. Enter 2 for Login
                 ''')
             # Taking user input for the entrance process.
-            self.enter_process = int(input())
+            try:
+                self.enter_process = int(input())
+            except Exception as e:
+                # Increment the retry counter.
+                self.entrance_retry += 1
+                if self.entrance_retry != 3:
+                     print(f"Please enter only numeric values. Your input {str(e).split()[-1]} is not valid")
+                # Call the method again for a valid input.
+                self.entrance_process_init()
+                return False
+                
             print(self.enter_process)
             
             # Navigate to Registration process if the user selects option 1.
@@ -24,9 +34,11 @@ class moneyCreditWithdrawSystem:
                 print("Navigating to Login")
             # If the user enters an invalid option, prompt them to choose again.
             else:
-                print("Please choose the correct entrance process number: 1 or 2")
-                # Increment the retry counter.
+                 # Increment the retry counter.
                 self.entrance_retry += 1
+                print(f"{self.entrance_retry}")
+                if self.entrance_retry != 3:
+                    print("Please choose the correct entrance process number: 1 or 2")
                 # Call the method again for a valid input.
                 self.entrance_process_init()
         else:
