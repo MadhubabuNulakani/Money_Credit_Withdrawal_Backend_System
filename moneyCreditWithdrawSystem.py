@@ -15,9 +15,11 @@ class moneyCreditWithdrawSystem:
             # Taking user input for the entrance process.
             try:
                 self.enter_process = int(input())
+            # Handling the exceptions when the use give the wrong input.
             except Exception as e:
                 # Increment the retry counter.
                 self.entrance_retry += 1
+                # Display an error message if the retry limit has not been reached.
                 if self.entrance_retry != 3:
                      print(f"Please enter only numeric values. Your input {str(e).split()[-1]} is not valid")
                 # Call the method again for a valid input.
@@ -36,6 +38,7 @@ class moneyCreditWithdrawSystem:
             else:
                  # Increment the retry counter.
                 self.entrance_retry += 1
+                # Display an error message if the retry limit has not been reached.
                 print(f"{self.entrance_retry}")
                 if self.entrance_retry != 3:
                     print("Please choose the correct entrance process number: 1 or 2")
