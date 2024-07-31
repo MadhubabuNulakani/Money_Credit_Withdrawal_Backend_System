@@ -1,3 +1,5 @@
+from registration import Registration
+
 class moneyCreditWithdrawSystem:
     # Constructor for the moneyCreditWithdrawSystem class.
     def __init__(self):
@@ -12,6 +14,7 @@ class moneyCreditWithdrawSystem:
                 1. Enter 1 for Registration 
                 2. Enter 2 for Login
                 ''')
+            
             # Taking user input for the entrance process.
             try:
                 self.enter_process = int(input())
@@ -25,12 +28,12 @@ class moneyCreditWithdrawSystem:
                 # Call the method again for a valid input.
                 self.entrance_process_init()
                 return False
-                
-            print(self.enter_process)
             
             # Navigate to Registration process if the user selects option 1.
             if self.enter_process == 1:
-                print("Navigating to Registration")
+                # print("Navigating to Registration")
+                registration_obj=Registration()
+                registration_obj.collecting_registration_input()
             # Navigate to Login process if the user selects option 2.
             elif self.enter_process == 2:
                 print("Navigating to Login")
@@ -39,14 +42,15 @@ class moneyCreditWithdrawSystem:
                  # Increment the retry counter.
                 self.entrance_retry += 1
                 # Display an error message if the retry limit has not been reached.
-                print(f"{self.entrance_retry}")
                 if self.entrance_retry != 3:
                     print("Please choose the correct entrance process number: 1 or 2")
                 # Call the method again for a valid input.
                 self.entrance_process_init()
+                
         else:
             # If retry limit exceeded, inform the user and terminate the process.
             print("Entrance process retry exceeded over 3 times. Unfortunately, we can't process your request due to incorrect input.")
+
 
 # Defining the main function.
 # The project process starts from here.
