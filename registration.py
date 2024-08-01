@@ -5,15 +5,56 @@ class Registration:
         pass
     
     def collecting_registration_input(self):
+        name_pattern = r'^[a-zA-Z]+$'
         allowed_domains = ["gmail", "yahoo"]
         # Regex pattern to check for a valid email structure
-        pattern =r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        email_pattern =r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         
+          # Collect a valid email address
+        while True:
+            try:
+                first_name  = input('Please enter your first name: \n')
+                is_valid = data_validation.validate_name(first_name,name_pattern)
+                if is_valid:
+                    break
+                else:
+                    print("First name is invalid. Please try again.")
+            except ValueError as ve:
+                print(f"Error: {ve}. Please try again.")
+            except Exception as e:
+                print(f"An unexpected error occurred: {e}. Please try again.")
+        
+        while True:
+            try:
+                last_name  = input('Please enter your last name: \n')
+                is_valid = data_validation.validate_name(last_name,name_pattern)
+                if is_valid:
+                    break
+                else:
+                    print("Last name is invalid. Please try again.")
+            except ValueError as ve:
+                print(f"Error: {ve}. Please try again.")
+            except Exception as e:
+                print(f"An unexpected error occurred: {e}. Please try again.")
+        # collect Age
+        while True:
+            try:
+                age  = input('Please enter your age: \n')
+                is_valid = data_validation.validate_age(age)
+                if is_valid:
+                    break
+                else:
+                    print("Age is invalid. Please try again.")
+            except ValueError as ve:
+                print(f"Error: {ve}. Please try again.")
+            except Exception as e:
+                print(f"An unexpected error occurred: {e}. Please try again.")
+                
         # Collect a valid email address
         while True:
             try:
                 email = input('Please enter a valid email address: \n')
-                is_valid = data_validation.validate_email(email,allowed_domains,pattern)
+                is_valid = data_validation.validate_email(email,allowed_domains,email_pattern)
                 if is_valid:
                     # print("Email verified.")
                     break
@@ -57,10 +98,14 @@ class Registration:
                 print(f"Error: {ve}. Please try again.")
             except Exception as e:
                 print(f"An unexpected error occurred: {e}. Please try again.")
-    
-    
                 
-        print(f"\nEmail address: {email} \nDate of birth: {dob} \nPassword: {password}")
+        print(f"""
+            First Name: {first_name}
+            Last Name: {last_name}
+            Email Address: {email}
+            Date of Birth: {dob}
+            Password: {password}
+            """)
 
     
     

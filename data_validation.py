@@ -1,5 +1,30 @@
 import re
 from datetime import datetime
+
+def validate_name(name,pattern):
+    try:
+        if len(name) > 3 and len(name) < 30 and re.match(pattern, name):
+            return True
+        else:
+           raise ValueError("Entered name is invalid, name length should be >3 and <30 chars and not allowed space, special characters")
+    except ValueError as ve:
+        raise ve
+    except Exception as e:
+            raise e
+
+def validate_age(age_input):
+    try:
+        if not age_input.isdigit():
+            raise ValueError("Entered value is incorrect, please provide valid age") 
+        age=int(age_input)
+        if age < 18 or age > 100:
+            raise ValueError("Age should be grater than 18 and less than 100 ")  
+        else:
+            return True
+    except ValueError as ve:
+        raise ve
+    except Exception as e:
+            raise e
     
 def validate_email(email,allowed_domains,pattern):
     try:
