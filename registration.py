@@ -10,7 +10,7 @@ class Registration:
         # Regex pattern to check for a valid email structure
         email_pattern =r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         
-          # Collect a valid email address
+        # Collect a valid First name 
         while True:
             try:
                 first_name  = input('Please enter your first name: \n')
@@ -24,6 +24,7 @@ class Registration:
             except Exception as e:
                 print(f"An unexpected error occurred: {e}. Please try again.")
         
+        # Collect a valid Last name
         while True:
             try:
                 last_name  = input('Please enter your last name: \n')
@@ -36,7 +37,8 @@ class Registration:
                 print(f"Error: {ve}. Please try again.")
             except Exception as e:
                 print(f"An unexpected error occurred: {e}. Please try again.")
-        # collect Age
+                
+        # collect a valid Age
         while True:
             try:
                 age  = input('Please enter your age: \n')
@@ -50,7 +52,7 @@ class Registration:
             except Exception as e:
                 print(f"An unexpected error occurred: {e}. Please try again.")
                 
-        # Collect a valid email address
+        # Collect a valid Email address
         while True:
             try:
                 email = input('Please enter a valid email address: \n')
