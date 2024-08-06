@@ -85,3 +85,13 @@ def confirm_password(confirm_password: str,password: str):
     except ValueError as ve:
         raise ve
 
+
+def validate_phone_number(phone_number: str):
+        try: # Phone number must be exactly 10 digits long and contain only numbers
+            if not phone_number.isdigit():
+                raise ValueError("Entered value is incorrect, please provide a valid phone number.")
+            if not re.fullmatch(r'\d{10}', phone_number):
+                raise ValueError("Phone number must be exactly 10 digits long and contain only numbers.")
+            return True
+        except ValueError as ve:
+            raise ve

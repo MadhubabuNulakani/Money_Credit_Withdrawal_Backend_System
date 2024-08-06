@@ -1,4 +1,7 @@
 from registration import Registration
+from login import Login
+import pandas as pd
+import os
 
 class moneyCreditWithdrawSystem:
     # Constructor for the moneyCreditWithdrawSystem class.
@@ -34,9 +37,11 @@ class moneyCreditWithdrawSystem:
                 # print("Navigating to Registration")
                 registration_obj=Registration()
                 registration_obj.collecting_registration_input()
+                self.save_registration_data(registration_obj.registration_details)
             # Navigate to Login process if the user selects option 2.
             elif self.enter_process == 2:
-                print("Navigating to Login")
+                login_obj=Login()
+                login_obj.login_with_credentials()
             # If the user enters an invalid option, prompt them to choose again.
             else:
                  # Increment the retry counter.
@@ -50,6 +55,17 @@ class moneyCreditWithdrawSystem:
         else:
             # If retry limit exceeded, inform the user and terminate the process.
             print("Entrance process retry exceeded over 3 times. Unfortunately, we can't process your request due to incorrect input.")
+
+    def save_registration_data(self,registration_data):
+        # Path to the existing CSV file
+        csv_file = 'data.csv'
+        new_df = pd.DataFrame([registration_data])
+        
+        if os.path.exists(csv_file):
+            main_df = pd.read_csv(csv_file)
+            new_df = pd.concat([main_df, new_df], ignore_index=True)
+            
+        new_df.to_csv(csv_file, index=False)
 
 
 # Defining the main function.
