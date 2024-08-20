@@ -1,5 +1,8 @@
 import re
 from datetime import datetime
+import pandas as pd
+import os
+
 
 def validate_name(name,pattern):
     try:
@@ -11,6 +14,7 @@ def validate_name(name,pattern):
         raise ve
     except Exception as e:
             raise e
+
 
 def validate_age(age_input):
     try:
@@ -25,6 +29,7 @@ def validate_age(age_input):
         raise ve
     except Exception as e:
             raise e
+  
     
 def validate_email(email,allowed_domains,pattern):
     try:
@@ -56,6 +61,7 @@ def validate_dob(dob: str):
     except ValueError:
         # Raise a ValueError if the date format is invalid
         raise ValueError(f"The provided date '{dob}' is invalid. Please use the format dd/mm/yyyy.")
+   
     
 def validate_password(password: str):
     try:
@@ -76,10 +82,11 @@ def validate_password(password: str):
        raise ve
     except Exception as e:
         raise e
+  
     
 def confirm_password(confirm_password: str,password: str):
     try:
-            # Check if the confirmed password matches the original password
+        # Check if the confirmed password matches the original password
         if password != confirm_password:
             raise ValueError("Password and confirm_password do not match.")
     except ValueError as ve:
@@ -87,11 +94,21 @@ def confirm_password(confirm_password: str,password: str):
 
 
 def validate_phone_number(phone_number: str):
-        try: # Phone number must be exactly 10 digits long and contain only numbers
-            if not phone_number.isdigit():
-                raise ValueError("Entered value is incorrect, please provide a valid phone number.")
-            if not re.fullmatch(r'\d{10}', phone_number):
-                raise ValueError("Phone number must be exactly 10 digits long and contain only numbers.")
-            return True
-        except ValueError as ve:
-            raise ve
+    try: # Phone number must be exactly 10 digits long and contain only numbers
+        if not phone_number.isdigit():
+            raise ValueError("Entered value is incorrect, please provide a valid phone number.")
+        if not re.fullmatch(r'\d{10}', phone_number):
+            raise ValueError("Phone number must be exactly 10 digits long and contain only numbers.")
+        return True
+    except ValueError as ve:
+        raise ve
+        
+        
+def check_user_id_existance(csv_file,email):
+    if os.path.exists(csv_file):
+            main_df = pd.read_csv(csv_file)
+            is_email_existed =  main_df[main_df['email'] == email]
+            return {is_email_existed, main_df}
+    else:
+        return None
+            # is_email_existed = main_df['email'].str.contains(email).any()
